@@ -15,7 +15,7 @@ jobs:
          command: sudo chmod +x ./gradlew
       - run:
           name: Increase version
-          command: ./gradlew :app:increaseMajorVersion
+          command: ./gradlew :increaseMajorVersion
       - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies
