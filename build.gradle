@@ -26,3 +26,50 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+tasks.register('increaseVersionCode') {
+    doLast {
+        def versionCode = RE_VERSION_CODE.toInteger() + 1
+
+        ant.propertyfile(file: "../gradle.properties") {
+            entry(key: "RE_VERSION_CODE", value: versionCode)
+        }
+    }
+}
+
+tasks.register('increaseMajorVersion') {
+    doLast {
+        def versions = RE_VERSION_NAME.tokenize('.')
+
+        versions[0] = versions[0].toInteger() + 1
+
+        ant.propertyfile(file: "../gradle.properties") {
+            entry(key: "RE_VERSION_NAME", value: versions.join('.'))
+        }
+    }
+}
+
+tasks.register('increaseMinorVersion') {
+    doLast {
+        def versions = RE_VERSION_NAME.tokenize('.')
+
+        versions[1] = versions[1].toInteger() + 1
+
+        ant.propertyfile(file: "../gradle.properties") {
+            entry(key: "RE_VERSION_NAME", value: versions.join('.'))
+            entry(key: "TESTEF", value: 123)
+        }
+    }
+}
+
+tasks.register('increasePatchVersion') {
+    doLast {
+        def versions = RE_VERSION_NAME.tokenize('.')
+
+        versions[2] = versions[2].toInteger() + 1
+
+        ant.propertyfile(file: "../gradle.properties") {
+            entry(key: "RE_VERSION_NAME", value: versions.join('.'))
+        }
+    }
+}
